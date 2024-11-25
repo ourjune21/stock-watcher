@@ -1,0 +1,101 @@
+name: Deploy Airflow to EC2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dags/**'
+      - 'plugins/**'
+      - 'docker-compose.yml'
+      - 'compose/prod/traefik/**'
+
+env:
+  AWS_REGION: us-west-2  # Change this to your AWS region
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+
+      - name: Add EC2 host key to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to EC2
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
+        run: |
+          # Create a tar of the repository
+          tar -czf deploy.tar.gz \
+            dags/ \
+            plugins/ \
+            docker-compose.yml \
+            compose/prod/traefik/ \
+            prod.yaml
+
+          # Copy files to EC2
+          scp deploy.tar.gz ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:~/airflow-deploy.tar.gz
+
+          # Execute deployment commands on EC2
+          ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
+            # Navigate to your deployment directory
+            cd ~/airflow  # Adjust this path to your actual deployment directory
+
+            # Create temporary directory for new files
+            mkdir -p ~/temp_deploy
+            cd ~/temp_deploy
+
+            # Extract new files to temporary directory
+            tar -xzf ~/airflow-deploy.tar.gz
+
+            # Create backup of current state
+            timestamp=$(date +%Y%m%d_%H%M%S)
+            cd ~/airflow
+            mkdir -p backups
+            tar -czf backups/backup_${timestamp}.tar.gz .
+
+            # Sync new DAGs while preserving existing ones
+            rsync -av --delete ~/temp_deploy/dags/ ~/airflow/dags/
+            
+            # Sync new plugins while preserving existing ones
+            rsync -av --delete ~/temp_deploy/plugins/ ~/airflow/plugins/
+
+            # Copy new docker-compose and traefik files only if they exist
+            if [ -f ~/temp_deploy/docker-compose.yml ]; then
+              cp ~/temp_deploy/docker-compose.yml ~/airflow/
+            fi
+            
+            if [ -f ~/temp_deploy/prod.yaml ]; then
+              cp ~/temp_deploy/prod.yaml ~/airflow/
+            fi
+            
+            if [ -d ~/temp_deploy/compose/prod/traefik ]; then
+              rsync -av ~/temp_deploy/compose/prod/traefik/ ~/airflow/compose/prod/traefik/
+            fi
+
+            # Clean up temporary files
+            rm -rf ~/temp_deploy
+            rm ~/airflow-deploy.tar.gz
+
+            # Rebuild and restart containers
+            docker-compose -f docker-compose.yml -f prod.yaml down
+            docker-compose -f docker-compose.yml -f prod.yaml build
+            docker-compose -f docker-compose.yml -f prod.yaml up -d
+          EOF
