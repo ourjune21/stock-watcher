@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - 'dags/**'
-      - 'plugins/**'
-      - 'docker-compose.yml'
-      - 'compose/prod/traefik/**'
+      - 'airflow/dags/**'
+      - 'airflow/plugins/**'
+      - 'airflow/docker-compose.yml'
+      - 'airflow/compose/prod/traefik/**'
 
 env:
   AWS_REGION: us-west-2  # Change this to your AWS region
@@ -44,11 +44,11 @@ jobs:
         run: |
           # Create a tar of the repository
           tar -czf deploy.tar.gz \
-            dags/ \
-            plugins/ \
-            docker-compose.yml \
-            compose/prod/traefik/ \
-            prod.yaml
+            airflow/dags/ \
+            airflow/plugins/ \
+            airflow/docker-compose.yml \
+            airflow/compose/prod/traefik/ \
+            airflow/prod.yaml
 
           # Copy files to EC2
           scp deploy.tar.gz ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:~/airflow-deploy.tar.gz
@@ -56,7 +56,7 @@ jobs:
           # Execute deployment commands on EC2
           ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
             # Navigate to your deployment directory
-            cd ~/airflow  # Adjust this path to your actual deployment directory
+            cd ~/projects/orangutan-stem/airflow  # Updated path to match your EC2 directory
 
             # Create temporary directory for new files
             mkdir -p ~/temp_deploy
@@ -67,27 +67,27 @@ jobs:
 
             # Create backup of current state
             timestamp=$(date +%Y%m%d_%H%M%S)
-            cd ~/airflow
+            cd ~/projects/orangutan-stem/airflow
             mkdir -p backups
             tar -czf backups/backup_${timestamp}.tar.gz .
 
             # Sync new DAGs while preserving existing ones
-            rsync -av --delete ~/temp_deploy/dags/ ~/airflow/dags/
+            rsync -av --delete ~/temp_deploy/airflow/dags/ ~/projects/orangutan-stem/airflow/dags/
             
             # Sync new plugins while preserving existing ones
-            rsync -av --delete ~/temp_deploy/plugins/ ~/airflow/plugins/
+            rsync -av --delete ~/temp_deploy/airflow/plugins/ ~/projects/orangutan-stem/airflow/plugins/
 
             # Copy new docker-compose and traefik files only if they exist
-            if [ -f ~/temp_deploy/docker-compose.yml ]; then
-              cp ~/temp_deploy/docker-compose.yml ~/airflow/
+            if [ -f ~/temp_deploy/airflow/docker-compose.yml ]; then
+              cp ~/temp_deploy/airflow/docker-compose.yml ~/projects/orangutan-stem/airflow/
             fi
             
-            if [ -f ~/temp_deploy/prod.yaml ]; then
-              cp ~/temp_deploy/prod.yaml ~/airflow/
+            if [ -f ~/temp_deploy/airflow/prod.yaml ]; then
+              cp ~/temp_deploy/airflow/prod.yaml ~/projects/orangutan-stem/airflow/
             fi
             
-            if [ -d ~/temp_deploy/compose/prod/traefik ]; then
-              rsync -av ~/temp_deploy/compose/prod/traefik/ ~/airflow/compose/prod/traefik/
+            if [ -d ~/temp_deploy/airflow/compose/prod/traefik ]; then
+              rsync -av ~/temp_deploy/airflow/compose/prod/traefik/ ~/projects/orangutan-stem/airflow/compose/prod/traefik/
             fi
 
             # Clean up temporary files
