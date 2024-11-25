@@ -12,6 +12,9 @@ on:
 
 env:
   AWS_REGION: us-west-2  # Change this to your AWS region
+permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read  
 
 jobs:
   deploy:
