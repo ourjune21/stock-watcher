@@ -1,0 +1,95 @@
+[0m12:36:17.601361 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7eff5779c980>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7eff56a67fb0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7eff56a64ce0>]}
+
+
+============================== 12:36:17.604619 | f8c281c0-20f9-4112-a3da-7648d0c71fc9 ==============================
+[0m12:36:17.604619 [info ] [MainThread]: Running with dbt=1.8.9
+[0m12:36:17.605082 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'debug': 'False', 'log_path': 'logs', 'version_check': 'True', 'profiles_dir': '/home/woong/.dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'log_format': 'default', 'invocation_command': 'dbt init', 'introspect': 'True', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m12:36:17.611885 [warn ] [MainThread]: [ConfigFolderDirectory]: Unable to parse logging event dictionary. Failed to parse dir field: expected string or bytes-like object, got 'PosixPath'.. Dictionary: {'dir': PosixPath('/home/woong/.dbt')}
+[0m12:36:17.612410 [info ] [MainThread]: Creating dbt configuration folder at 
+[0m12:37:11.739314 [debug] [MainThread]: Starter project path: /home/woong/de4_week3/myvenv/lib/python3.12/site-packages/dbt/include/starter_project
+[0m12:37:11.741786 [info ] [MainThread]: 
+Your new dbt project "stock_elt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m12:37:11.742225 [info ] [MainThread]: Setting up your profile.
+[0m12:54:54.872015 [info ] [MainThread]: Profile stock_elt written to /home/woong/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m12:54:54.911156 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 1169.9148, "process_in_blocks": "4784", "process_kernel_time": 0.04781, "process_mem_max_rss": "108944", "process_out_blocks": "88", "process_user_time": 1.309994}
+[0m12:54:54.921029 [debug] [MainThread]: Command `dbt init` succeeded at 12:54:54.919825 after 1169.93 seconds
+[0m12:54:54.932029 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7eff56d6d0a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7eff56f126f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7eff54d16de0>]}
+[0m12:54:54.935513 [debug] [MainThread]: Flushing usage events
+[0m13:02:51.131442 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f448c02dc70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f448a8a6240>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f448b0722a0>]}
+
+
+============================== 13:02:51.144725 | d1cecbc4-46dd-449a-82c3-9a7d81e2d56c ==============================
+[0m13:02:51.144725 [info ] [MainThread]: Running with dbt=1.8.9
+[0m13:02:51.145542 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'profiles_dir': '/home/woong/.dbt', 'log_path': 'logs', 'version_check': 'True', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt debug', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m13:02:51.173954 [info ] [MainThread]: dbt version: 1.8.9
+[0m13:02:51.174730 [info ] [MainThread]: python version: 3.12.3
+[0m13:02:51.175286 [info ] [MainThread]: python path: /home/woong/de4_week3/myvenv/bin/python3
+[0m13:02:51.175752 [info ] [MainThread]: os info: Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39
+[0m13:02:52.038075 [info ] [MainThread]: Using profiles dir at /home/woong/.dbt
+[0m13:02:52.038710 [info ] [MainThread]: Using profiles.yml file at /home/woong/.dbt/profiles.yml
+[0m13:02:52.039064 [info ] [MainThread]: Using dbt_project.yml file at /home/woong/de4_week3/stock-watcher/airflow/stock_dbt/dbt_project.yml
+[0m13:02:52.040381 [info ] [MainThread]: adapter type: snowflake
+[0m13:02:52.040982 [info ] [MainThread]: adapter version: 1.8.4
+[0m13:02:52.041438 [info ] [MainThread]: Configuration:
+[0m13:02:52.041960 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m13:02:52.042597 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m13:02:52.043197 [info ] [MainThread]: Required dependencies:
+[0m13:02:52.043647 [debug] [MainThread]: Executing "git --help"
+[0m13:02:52.046065 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m13:02:52.046664 [debug] [MainThread]: STDERR: "b''"
+[0m13:02:52.047022 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m13:02:52.047285 [info ] [MainThread]: Connection:
+[0m13:02:52.047570 [info ] [MainThread]:   account: zofygnx-mgb31072
+[0m13:02:52.047983 [info ] [MainThread]:   user: JM
+[0m13:02:52.048258 [info ] [MainThread]:   database: Stock_Watcher
+[0m13:02:52.048503 [info ] [MainThread]:   warehouse: compute_wh
+[0m13:02:52.048723 [info ] [MainThread]:   role: ACCOUNTADMIN
+[0m13:02:52.048940 [info ] [MainThread]:   schema: raw_data
+[0m13:02:52.049155 [info ] [MainThread]:   authenticator: None
+[0m13:02:52.049365 [info ] [MainThread]:   oauth_client_id: None
+[0m13:02:52.049589 [info ] [MainThread]:   query_tag: None
+[0m13:02:52.049814 [info ] [MainThread]:   client_session_keep_alive: False
+[0m13:02:52.050035 [info ] [MainThread]:   host: None
+[0m13:02:52.050250 [info ] [MainThread]:   port: None
+[0m13:02:52.050476 [info ] [MainThread]:   proxy_host: None
+[0m13:02:52.050802 [info ] [MainThread]:   proxy_port: None
+[0m13:02:52.051043 [info ] [MainThread]:   protocol: None
+[0m13:02:52.051273 [info ] [MainThread]:   connect_retries: 1
+[0m13:02:52.051489 [info ] [MainThread]:   connect_timeout: None
+[0m13:02:52.051717 [info ] [MainThread]:   retry_on_database_errors: False
+[0m13:02:52.052021 [info ] [MainThread]:   retry_all: False
+[0m13:02:52.052255 [info ] [MainThread]:   insecure_mode: False
+[0m13:02:52.052495 [info ] [MainThread]:   reuse_connections: None
+[0m13:02:52.052926 [info ] [MainThread]: Registered adapter: snowflake=1.8.4
+[0m13:02:52.124792 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m13:02:52.125654 [debug] [MainThread]: Using snowflake connection "debug"
+[0m13:02:52.126072 [debug] [MainThread]: On debug: select 1 as id
+[0m13:02:52.126320 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m13:02:51.907038 [debug] [MainThread]: SQL status: SUCCESS 1 in 1.318 seconds
+[0m13:02:51.908173 [debug] [MainThread]: On debug: Close
+[0m13:02:52.205084 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m13:02:52.205746 [info ] [MainThread]: [31m1 check failed:[0m
+[0m13:02:52.206152 [info ] [MainThread]: Project loading failed for the following reason:
+ project path </home/woong/de4_week3/stock-watcher/airflow/stock_dbt/dbt_project.yml> not found
+
+[0m13:02:52.209823 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 2.6879125, "process_in_blocks": "88216", "process_kernel_time": 1.063199, "process_mem_max_rss": "117144", "process_out_blocks": "1152", "process_user_time": 1.971752}
+[0m13:02:52.210758 [debug] [MainThread]: Command `dbt debug` failed at 13:02:52.210583 after 2.69 seconds
+[0m13:02:52.211229 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m13:02:52.211692 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f448a7feb70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f448b0fe150>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4489240380>]}
+[0m13:02:52.212117 [debug] [MainThread]: Flushing usage events

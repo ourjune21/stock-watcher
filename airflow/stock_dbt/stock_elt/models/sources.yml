@@ -1,0 +1,9 @@
+version: 2
+
+
+sources:
+  - name: raw
+    schema: raw_data
+    tables:
+     - name: fs_st_if_cpl
+       identifier: foreign_stock_info_complete
