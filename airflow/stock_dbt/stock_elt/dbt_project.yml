@@ -36,4 +36,3 @@ models:
       +materialized: ephemeral
     output:
       +materialized: table
-      +schema: analytics
