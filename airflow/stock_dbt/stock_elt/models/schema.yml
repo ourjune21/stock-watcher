@@ -4,7 +4,7 @@ models:
   - name: foreign_stock_change_rate_conditions
     description: "Final foreign_stock_change_rate_conditions info (table description)"
     columns:
-      - name: symbol
-        description: "Unique identifier for stock info (column description)"
+      - name: METRIC  
+        description: "METRIC  for stock info (column description)"
         tests:
           - not_null
