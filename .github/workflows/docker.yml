@@ -7,7 +7,7 @@ on:
     paths:
       - 'airflow/dags/**'
       - 'airflow/plugins/**'
-      - 'airflow/docker-compose.yaml'
+      - 'airflow/prod.yaml'
       - 'airflow/compose/prod/traefik/**'
 
 env:
@@ -59,7 +59,7 @@ jobs:
           # Execute deployment commands on EC2
           ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
               # Set variables for directories
-              DEPLOY_DIR=~/projects/orangutan-stem/airflow
+              DEPLOY_DIR=~/projects/stock-watcher/airflow
               TEMP_DIR=~/temp_deploy
               BACKUP_DIR=$DEPLOY_DIR/backups
 
@@ -85,9 +85,9 @@ jobs:
               # Sync new plugins with more permissive rsync
               rsync -av --no-g --delete --chmod=Du+rwx,Fu+rw $TEMP_DIR/airflow/plugins/ $DEPLOY_DIR/plugins/
 
-              # Copy new docker-compose and traefik files only if they exist
-              if [ -f $TEMP_DIR/airflow/docker-compose.yaml ]; then
-                  cp $TEMP_DIR/airflow/docker-compose.yaml $DEPLOY_DIR/
+              # Copy new prod and traefik files only if they exist
+              if [ -f $TEMP_DIR/airflow/prod.yaml ]; then
+                  cp $TEMP_DIR/airflow/prod.yaml $DEPLOY_DIR/
               fi
 
               if [ -f $TEMP_DIR/airflow/prod.yaml ]; then
