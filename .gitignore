@@ -1,0 +1,5 @@
+.idea/
+airflow/dags/__pycache__/
+airflow/logs/
+airflow/plugins/operators/__pycache__/
+venv/
