@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: foreign_stock_change_rate_conditions
+    description: "Final foreign_stock_change_rate_conditions info (table description)"
+    columns:
+      - name: METRIC  
+        description: "METRIC  for stock info (column description)"
+        tests:
+          - not_null
