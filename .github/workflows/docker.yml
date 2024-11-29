@@ -90,13 +90,13 @@ jobs:
                   cp $TEMP_DIR/airflow/prod.yaml $DEPLOY_DIR/
               fi
 
-              if [ -f $TEMP_DIR/airflow/prod.yaml ]; then
-                  cp $TEMP_DIR/airflow/prod.yaml $DEPLOY_DIR/
-              fi
-
               if [ -d $TEMP_DIR/airflow/compose/prod/traefik ]; then
                   rsync -av --chmod=Du+rwx,Fu+rw $TEMP_DIR/airflow/compose/prod/traefik/ $DEPLOY_DIR/compose/prod/traefik/
               fi
+
+              # Restart Docker Compose services
+              cd $DEPLOY_DIR
+              docker compose restart
 
               # Clean up temporary files
               rm -rf $TEMP_DIR
