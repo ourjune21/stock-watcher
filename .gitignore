@@ -1,6 +1,7 @@
 .idea/
 airflow/dags/__pycache__/
 airflow/logs/
+airflow/plugins/__pycache__/
 airflow/plugins/operators/__pycache__/
 venv/
 .DS_Store
